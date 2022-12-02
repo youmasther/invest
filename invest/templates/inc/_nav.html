@@ -1,0 +1,37 @@
+{% load static %}
+<div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'img/favicon.png' %}" width="50" height="50" alt="" class="mr-3">
+            <span class="text-primary " style="font-size: 25px; font-weight: bold;"> Travelling easy</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link " href="#">Investir <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">mysubito.net </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">subitotaxi.net </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0 mr-5">
+                {% if request.user.is_authenticated %}
+                <label class="label mr-2">Hi, {{request.user.investisseur}}!</label>
+                <a class="btn btn-outline-primary btn-round my-2 my-sm-0 mr-2" href="{% url 'profile' %}" title="Mon compte"><i class="fas fa-user"></i></a>
+                <a class="btn btn-outline-primary btn-round my-2 my-sm-0" href="{% url 'logout' %}" title="Déconnexion"><i class="fas fa-sign-out-alt"></i></a>
+                {% else %}
+                <button class="btn btn-outline-primary btn-round my-2 my-sm-0" type="button" title="Mon compte" data-toggle="modal" data-target="#loginModal"><i class="fas fa-user-lock"></i></button>
+                {% endif %}
+                
+            </form>
+        </div>
+    </nav>
+</div>

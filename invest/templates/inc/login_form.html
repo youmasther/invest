@@ -1,0 +1,43 @@
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-bottom-0">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-title text-center">
+            <h4>Se connecter pour investir</h4>
+          </div>
+          <div class="d-flex flex-column text-center">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+              <div class="form-group">
+                <input type="email" class="form-control" id="email1"placeholder="Votre adresse mail" name="email" required>
+              </div>
+              <div class="form-group">
+                <input type="password" class="form-control" id="password1" placeholder="Votre mot de passe" name="password" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block btn-round">Se connecter</button>
+            </form>
+            
+            {% comment %} <div class="text-center text-muted delimiter">or use a social network</div> {% endcomment %}
+            {% comment %} <div class="d-flex justify-content-center social-buttons">
+              <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Twitter">
+                <i class="fab fa-twitter"></i>
+              </button>
+              <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Facebook">
+                <i class="fab fa-facebook"></i>
+              </button>
+              <button type="button" class="btn btn-secondary btn-round" data-toggle="tooltip" data-placement="top" title="Linkedin">
+                <i class="fab fa-linkedin"></i>
+              </button>
+          </div> {% endcomment %}
+        </div>
+      </div>
+        <div class="modal-footer d-flex justify-content-center">
+          <div class="signup-section">Pas encore de compte? <a href="{% url 'register' %}" class="text-primary"> S'inscrire</a>.</div>
+        </div>
+    </div>
+  </div>
