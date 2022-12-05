@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from django.http.response import HttpResponse
 import json
 import uuid
+import hashlib
 
 # Create your views here.
 
@@ -50,4 +51,14 @@ def send_investissement(request):
 
 
 def ipn(request):
-    pass
+    if request.method == "POST":
+        inputtxt = request.POST['getrow']
+        api_key_sha256 = request.POST['api_key_sha256']
+        api_secret_sha256 = request.POST['api_secret_sha256']
+        my_api_secret_sha256 = hashlib.sha256(
+            b'here my api secret').hexdigest()
+        my_api_key_sha256 = hashlib.sha256(b'here my api key').hexdigest()
+        if my_api_key_sha256 == api_key_sha256 and my_api_secret_sha256 == api_secret_sha256:
+            return HttpResponse(json.dumps({"message": "test", "status": 1}))
+        else:
+            HttpResponse(json.dumps({"message": "test", "status": 0}))

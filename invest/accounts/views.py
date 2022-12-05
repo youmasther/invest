@@ -102,3 +102,7 @@ def change_password(request):
 
 def profile(request):
     return render(request, "profile.html")
+
+
+def hx_update_user(request):
+    pass
