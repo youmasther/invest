@@ -77,6 +77,7 @@ AUTHENTICATION_BACKENDS = (
     'accounts.backends.CaseInsensitiveModelBackend'
 )
 
+USE_THOUSAND_SEPARATOR = True
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

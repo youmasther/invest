@@ -8,6 +8,7 @@ class Campagne(models.Model):
     STATUS_TYPE_CHOICES = (('in_process', 'EN COURS'),
                            ('ended', 'TERMINER'), ('cancelled', 'ANNULER'))
     libelle = models.CharField(max_length=100, null=True)
+    amount_needed = models.IntegerField(null=True)
     status = models.CharField(
         max_length=100, choices=STATUS_TYPE_CHOICES, default="in_process")
     make_at = models.DateTimeField(auto_now_add=True)
@@ -24,7 +25,7 @@ class Campagne(models.Model):
         return f'{self.libelle}'
 
     @property
-    def investisseurs(self):
+    def investissements(self):
         return Investissement.objects.filter(campagne=self)
 
     @property
@@ -40,14 +41,23 @@ class Campagne(models.Model):
         return Investissement.objects.filter(campagne=self, status="in_process", is_send=False)
 
     @property
+    def solde_obtenu(self):
+        transactions = Investissement.objects.filter(
+            campagne=self, status="validate")
+        somme = 0
+        if transactions:
+            somme = sum(int(transaction.amount)
+                        for transaction in transactions)
+        if somme == 0:
+            return 0
+        return somme
+
+    @property
     def pourcentage(self):
-        success = Investissement.objects.filter(
-            campagne=self, status="validate").count()
-        total = Investissement.objects.filter(campagne=self).count()
+        total = self.solde_obtenu
         if total == 0:
             return 0
-        return (int(success) * 100) // int(total)
-
+        return (int(total) * 100) // int(total)
 
 # class Operator(models.Model):
 #     OPERATOR_TYPE_CHOICES = (('wallet', 'Wallet'), ('visa', 'VISA'))

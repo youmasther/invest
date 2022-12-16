@@ -76,7 +76,7 @@ class CustomUser(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
     profile_image = models.ImageField(max_length=255, upload_to=get_profile_image_filepath,
-                                      null=True, blank=True, default=get_default_profile_image)
+                                      null=True, blank=True)
     objects = MyAccountManager()
     USERNAME_FIELD = 'email'
     # USERNAME_FIELD = 'email'
@@ -111,7 +111,7 @@ class Investisseur(models.Model):
     indicatif = models.CharField(max_length=4, null=True, blank=True)
     cni = models.CharField(max_length=60, null=True)
     carte = models.ImageField(max_length=255, upload_to=get_investisseur_carte,
-                              null=True, blank=True, default=get_default_investisseur_carte)
+                              null=True, blank=True)
     civilite = models.CharField(
         max_length=50, choices=CIVILITE_TYPE_CHOICES, blank=True, null=True)
     status = models.CharField(max_length=50, null=True, blank=True)

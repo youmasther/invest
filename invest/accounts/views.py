@@ -6,8 +6,9 @@ from django.contrib.auth.decorators import login_required
 from .models import CustomUser as User
 from django.http.response import HttpResponse
 from .forms import *
+from core.models import Investissement
 import json
-
+import os
 
 # Create your views here.
 
@@ -64,8 +65,8 @@ def register(request):
             'prenom': request.POST.get('prenom', ''),
             'nom': request.POST.get('nom', ''),
             "telephone": f"{request.POST.get('indicatif', '')}{request.POST.get('phone', '')} ",
-            "adresse": f"{request.POST.get('pays', '')}, {request.POST.get('adresse', '')} ",
-            "cni": request.POST.get('cni', ''),
+            # "adresse": f"{request.POST.get('pays', '')}, {request.POST.get('adresse', '')} ",
+            # "cni": request.POST.get('cni', ''),
             'user': user
         }
 
@@ -81,6 +82,7 @@ def register(request):
 # @login_required(login_url='/')
 
 
+@login_required(login_url='/')
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeFormEdit(request.user, request.POST)
@@ -95,14 +97,50 @@ def change_password(request):
                 request, 'SVP veillez corriger les erreurs ci aprés.')
     else:
         form = PasswordChangeFormEdit(request.user)
-    return render(request, 'accounts/change_password.html', {
+    return render(request, 'change_password.html', {
         'form': form
     })
 
 
+@login_required(login_url='/')
 def profile(request):
-    return render(request, "profile.html")
+    investisseur = request.user.investisseur
+    investissements = Investissement.objects.filter(
+        investisseur=request.user.investisseur)
+
+    return render(request, "profile.html", {"investisseur": investisseur, "investissements": investissements})
 
 
-def hx_update_user(request):
-    pass
+def hx_update_user_profile_img(request):
+    if request.method == 'POST':
+        if request.user.profile_image:
+            try:
+                os.remove(os.path.abspath(request.user.profile_image.url))
+            except Exception as e:
+                print('Exception in removing old profile image: ', e)
+        print(request.FILES)
+        profile_image_form = ProfileImageUpdateForm(
+            request.POST, request.FILES, instance=request.user)
+        if profile_image_form.is_valid():
+            profile_image_form.save()
+            print("ok")
+            return HttpResponse(json.dumps({"message": "Photo de profil changer avec succes", "status": 1}))
+        else:
+            return HttpResponse(json.dumps({"message": "Erreur:Veuillez revoir les informations soumisent", "status": 0}))
+
+
+def hx_update_user_carte_img(request):
+    if request.method == 'POST':
+        if request.user.profile_image:
+            try:
+                os.remove(os.path.abspath(request.user.investisseur.carte.url))
+            except Exception as e:
+                print('Exception in removing old profile image: ', e)
+        carte_form = CarteImageUpdateForm(
+            request.POST, request.FILES, instance=request.user)
+        if carte_form.is_valid():
+            print("Ok carte")
+            carte_form.save()
+            return HttpResponse(json.dumps({"message": "Piéce changer avec succes", "status": 1}))
+        else:
+            return HttpResponse(json.dumps({"message": "Erreur:Veuillez revoir les informations soumisent", "status": 0}))

@@ -1,23 +1,25 @@
 .c-50 {
-  background-image: linear-gradient(-37deg, #A67F66 0%, #C49A7F 19%, #A2795E 40%, #A47C62 66%, #EBC5A4 100%);
-border-radius: 20px 20px 0 0;
-border-radius: 20px 20px 0px 0px;
+  background-image: linear-gradient(-37deg, #f77d72 0%, #f77d72 19%, #f77d72 40%, #f77d72 66%, #f77d72 100%);
+  border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0px 0px;
 }
 
 .c-150 {
-  background-image: linear-gradient(-50deg, #9FA6AC 0%, #868C94 40%, #C4CBD1 79%, #B3BBC0 100%);
-border-radius: 20px 20px 0 0;
-border-radius: 20px 20px 0px 0px;
+  background-image: linear-gradient(-50deg, #f25258 0%, #f25262 40%, #f25270 79%, #f25278 100%);
+  border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0px 0px;
 }
 
 .c-250 {
-  background-image: linear-gradient(-25deg, #EFDA86 0%, #C69637 40%, #FEF2AE 79%, #D3CC72 100%);
-border-radius: 20px 20px 0 0;
-border-radius: 20px 20px 0px 0px;
+  background-image: linear-gradient(-25deg, #f25286 0%, #f25292 40%, #f25302 79%, #f25310 100%);
+  border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0px 0px;
 }
 
 .c-500 {
-background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, #D3E9F8 100%);
+  background-image: linear-gradient(-50deg, #f03d72 0%, #f03d72 40%, #f03d72 79%, #f03d72 100%);
+  border-radius: 20px 20px 0 0;
+  border-radius: 20px 20px 0px 0px;
 }
 
 .c-50,
@@ -31,24 +33,28 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   align-items: center;
   justify-content: center;
 }
+
 .calculate {
   text-align: center;
   background-color: #fff;
   padding-bottom: 20px;
 }
+
 .calculate-wrap {
   height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .calculate-amount {
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 14px;
   font-weight: 400;
   font-family: Roboto, sans-serif;
   line-height: 26px;
 }
+
 .calculate-text {
   color: #fff;
   font-weight: 700;
@@ -56,6 +62,7 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   font-size: 45px;
   margin: 0;
 }
+
 .calculate-input {
   background: transparent;
   border: none;
@@ -68,14 +75,17 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   width: 154px;
   text-align: center;
 }
+
 .calculate-slider {
   padding: 0 60px;
 }
+
 .calculate-inner {
   display: flex;
   justify-content: space-between;
   padding: 0 90px;
 }
+
 .calculate-block {
   font-size: 14px;
   font-family: "Roboto", sans-serif;
@@ -84,11 +94,13 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   text-align: center;
   line-height: 26px;
 }
+
 .calculate-block span {
   font-weight: 700;
   font-size: 25px;
   color: #1a273a;
 }
+
 .calculate-btn {
   font-family: "Roboto", sans-serif;
   font-weight: 700;
@@ -101,17 +113,20 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   padding: 15px;
   border-radius: 10px;
 }
+
 .calculate-btn-wrapper {
   margin: 20px 0;
 }
+
 .noUi-handle {
   background: #0085ff;
-  box-shadow: 0 11px 19px 0 rgba(12,71,124,0.48);
+  box-shadow: 0 11px 19px 0 rgba(12, 71, 124, 0.48);
   border-radius: 50%;
   border: none;
   outline: none;
   cursor: pointer;
 }
+
 .noUi-handle:before {
   width: 20px;
   height: 20px;
@@ -120,26 +135,32 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .noUi-handle:after {
   display: none;
 }
+
 .noUi-horizontal .noUi-handle {
   width: 52px;
   height: 52px;
   top: -21px;
 }
+
 .noUi-target {
   background: #a1afc3;
   border: none;
   box-shadow: none;
   outline: none;
 }
+
 .noUi-connects {
   border-radius: 10px;
 }
+
 .noUi-connect {
   background: #0085ff;
 }
+
 .noUi-horizontal .noUi-tooltip {
   font-weight: 700;
   font-size: 14px;
@@ -147,13 +168,14 @@ background-image: linear-gradient(-50deg, #70BEFF 0%, #6999DA 40%, #BAE2FF 79%, 
   line-height: 26px;
   text-align: center;
   background: #fff;
-  box-shadow: 0 11px 28px 0 rgba(255,255,255,0.3);
+  box-shadow: 0 11px 28px 0 rgba(255, 255, 255, 0.3);
   padding: 5px 11px;
   border: none;
   border-radius: 20px;
   text-transform: uppercase;
   font-family: "Roboto", sans-serif;
 }
+
 .noUi-horizontal .noUi-tooltip:after {
   position: absolute;
   content: '';

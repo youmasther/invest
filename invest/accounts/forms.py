@@ -111,7 +111,7 @@ class InvestisseurForm(forms.ModelForm):
 
     class Meta:
         model = Investisseur
-        fields = ("prenom", "nom", "telephone", "adresse", "cni", "user",)
+        fields = ("prenom", "nom", "telephone", "user",)
 
 
 class UpdateInvestisseurForm(forms.ModelForm):
@@ -119,3 +119,19 @@ class UpdateInvestisseurForm(forms.ModelForm):
     class Meta:
         model = Investisseur
         fields = ("prenom", "nom", "adresse", "telephone", "user",)
+
+
+class ProfileImageUpdateForm(forms.ModelForm):
+    """Cette class permet de modifier seulement l'image de profile 
+    de l'utilisateur connecté"""
+    class Meta:
+        model = CustomUser
+        fields = ('profile_image',)
+
+
+class CarteImageUpdateForm(forms.ModelForm):
+    """Cette class permet de modifier seulement l'image de profile 
+        de l'utilisateur connecté"""
+    class Meta:
+        model = Investisseur
+        fields = ('carte',)

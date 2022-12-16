@@ -10,7 +10,7 @@ noUiSlider.create(slider, {
     connect: [true, false],
     range: {
         'min': 100000,
-        'max': 5000000
+        'max': 2000000
     },
     step: 5000,
     format: {

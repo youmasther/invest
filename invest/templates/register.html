@@ -13,19 +13,55 @@
     .card-registration .select-arrow {
         top: 13px;
     }
+    .cascading-right {
+        margin-right: -100px;
+    }
+    .cascading-right{
+        
+        background: rgba( 253, 251, 251, 0.7 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 3px );
+        -webkit-backdrop-filter: blur( 3px );
+        border-radius: 10px;
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        z-index:200;
+    }
+    @media (max-width: 991.98px) {
+        .cascading-right {
+        margin-right: 0;
+        position:absolute;
+        }
+    }
+    .btn-primary{
+        background: white;
+        color: #F66884;
+    }
+    .btn-primary:hover {
+        background: #F66884;
+        color: white;
+    }
 </style>
 {% endblock custom_css %}
 
 {% block content %}
-<div class="container mt-5">
-    <div class="card shadow-lg">
-        <div class="card-body">
-            <form class="needs-validation" novalidate id="main-register-form2" method="post">
+
+<!-- Section: Design Block -->
+<section class="text-center text-lg-start">
+    
+  
+    <!-- Jumbotron -->
+    <div class="container py-4">
+      <div class="row g-0 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0" style="position: relative;">
+          <div class="card cascading-right">
+            <div class="card-body p-5 shadow-5">
+              <h2 class="fw-bold mb-5">S'inscrire</h2>
+              <form class="needs-validation form-group" novalidate id="main-register-form2" method="post">
                 {% csrf_token %}
                 <!-- <div class="form-row"> -->
                 <div class="row">
-                    <div class="col-md-8 mb-3">
-                        <label for="validationCustom00">Email:</label>
+                    <div class="col-md-12 mb-3 form-group">
+                        <label for="validationCustom00" class="float-left">Email:</label>
                         <input type="email" class="form-control" name="email" id="validationCustom00"
                             placeholder="Votre email" value="" required>
                         <div class="valid-feedback">
@@ -37,8 +73,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom01">Prenom</label>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationCustom01" class="float-left">Prenom</label>
                         <input type="text" class="form-control" id="validationCustom01" placeholder="Votre prenom"
                             value="" name="prenom" required>
                         <div class="valid-feedback">
@@ -48,8 +84,8 @@
                             SVP veuillez remplir ce champ.
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom02">Nom:</label>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationCustom02" class="float-left">Nom:</label>
                         <input type="text" class="form-control" id="validationCustom02" placeholder="Votre nom "
                             value="" name="nom" required>
                         <div class="valid-feedback">
@@ -61,8 +97,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-8 mb-3">
-                        <label for="validationCustomUsername">Téléphone:</label>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationCustomUsername" class="float-left">Téléphone:</label>
                         <div class="input-group">
                             <div class="input-group-prepend">
                                 <!-- <span class="input-group-text">@</span> -->
@@ -80,48 +116,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                
+                <div class="row mb-3">
                     <div class="col-md-6 mb-3">
-                        <label for="validationCustom06">CNI ou passport:</label>
-                        <input type="text" class="form-control" id="validationCustom06"
-                            placeholder="Votre cni ou passport " value="" name="cni" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            SVP veuillez remplir ce champ.
-                        </div>
-                    </div>
-                </div>
-                <!-- </div> -->
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom03">Pays</label>
-                        <input type="text" class="form-control" id="validationCustom03" name="pays"
-                            placeholder="Votre pays" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            SVP veuillez remplir ce champ.
-                        </div>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationCustom04">Adresse</label>
-                        <input type="text" class="form-control" id="validationCustom04"
-                            placeholder="Ex: Dakar, Mermoz, ..." name="adresse" required>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            SVP veuillez remplir ce champ.
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="password">Mot de passe:</label>
+                        <label for="password" class="float-left">Mot de passe:</label>
                         <input type="password" class="form-control" name="password1" placeholder="Votre mot de passe"
                             id="password" required>
                         <div class="valid-feedback">
@@ -132,7 +130,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="password2">Confirmer le mot de passe</label>
+                        <label for="password2" class="float-left">Confirmer le mot de passe</label>
                         <input type="password" class="form-control" placeholder="Confirmez le mot de passe"
                             id="password2" name="password2" required>
                         <div class="valid-feedback">
@@ -144,22 +142,22 @@
                     </div>
 
                 </div>
-                <div class="form-group">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                        <label class="form-check-label" for="invalidCheck">
-                            Agree to terms and conditions
-                        </label>
-                        <div class="invalid-feedback">
-                            You must agree before submitting.
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn-primary" type="submit">Valider</button>
+                
+                <button class="btn btn-primary btn-lg float-right" type="submit">Valider</button>
             </form>
+            </div>
+          </div>
         </div>
+  
+        <div class="col-lg-6 mb-5 mb-lg-0 d-none d-lg-block">
+          <img src="{% static 'img/register_img.jpg' %}" class="w-100 rounded-4 shadow-4"
+            alt="" />
+        </div>
+      </div>
     </div>
-</div>
+    <!-- Jumbotron -->
+  </section>
+  <!-- Section: Design Block -->
 
 {% endblock %}
 
