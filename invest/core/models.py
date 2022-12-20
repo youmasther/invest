@@ -9,6 +9,8 @@ class Campagne(models.Model):
                            ('ended', 'TERMINER'), ('cancelled', 'ANNULER'))
     libelle = models.CharField(max_length=100, null=True)
     amount_needed = models.IntegerField(null=True)
+    debut_campagne = models.DateField(null=True)
+    fin_campagne = models.DateField(null=True)
     status = models.CharField(
         max_length=100, choices=STATUS_TYPE_CHOICES, default="in_process")
     make_at = models.DateTimeField(auto_now_add=True)
@@ -81,7 +83,7 @@ class Investissement(models.Model):
     transaction_uid = models.CharField(max_length=100, unique=True)
     investisseur = models.ForeignKey(Investisseur, on_delete=models.CASCADE)
     amount = models.IntegerField()
-    telephone = models.CharField(max_length=100)
+    telephone = models.CharField(max_length=100, null=True, blank=True)
     campagne = models.ForeignKey(Campagne, on_delete=models.CASCADE)
 
     is_send = models.BooleanField(default=False)
@@ -100,4 +102,35 @@ class Investissement(models.Model):
         db_table = "investissement"
 
     def __str__(self) -> str:
-        return f'{self.campagne}'
+        return f'{self.campagne}/{self.investisseur}'
+
+    @property
+    def echeances(self):
+        echeances = Echeance.objects.filter(investissement=self)
+        if echeances:
+            return echeances
+        else:
+            return None
+
+
+class Echeance(models.Model):
+    STATUS_TYPE_CHOICES = (('yes', 'Rembourser'),
+                           ('non', 'Non Rembourser'))
+    investissement = models.ForeignKey(
+        Investissement, on_delete=models.CASCADE)
+    periode = models.DateField()
+    montant_investi = models.IntegerField(default=0)
+    interet = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
+    status = status = models.CharField(
+        max_length=100, choices=STATUS_TYPE_CHOICES, default="non")
+    date_remboursement = models.DateTimeField(
+        verbose_name="dernier modification", auto_now=True)
+
+    class Meta:
+        verbose_name = "Echeance"
+        verbose_name_plural = "Echeances"
+        db_table = "echeance"
+
+    def __str__(self) -> str:
+        return f'{self.investissement} '

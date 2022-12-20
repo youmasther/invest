@@ -21,7 +21,16 @@ class InvestissementAdmin(admin.ModelAdmin):
     search_fields = ('campagne', 'transaction_uid', 'amount',)
 
 
+@admin.register(Echeance)
+class EcheanceAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'periode', 'montant_investi', 'interet',
+                    'total', 'status', 'date_remboursement')
+    list_display_links = ('__str__', 'periode',)
+    search_fields = ('periode',)
+
+
 admin.site.register(Campagne, CampagneAdmin)
 admin.site.register(Investissement, InvestissementAdmin)
+
 # admin.site.register(Commission, CommissionAdmin)
 # admin.site.register(Operator, OperatorAdmin)

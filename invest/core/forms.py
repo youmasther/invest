@@ -16,3 +16,11 @@ class InvestissementCreationForm(forms.ModelForm):
         model = Investissement
         fields = ('transaction_uid', 'investisseur', 'telephone', 'amount',
                   'campagne', "type", "remboursement", 'is_send', 'status')
+
+
+class EcheanceCreationForm(forms.ModelForm):
+
+    class Meta:
+        model = Echeance
+        fields = ("investissement", "periode", "montant_investi",
+                  "interet", "total", "status",)

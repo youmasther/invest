@@ -6,6 +6,7 @@ from rest_framework.decorators import api_view
 from django.http.response import HttpResponse
 from .models import *
 from .forms import *
+from .helpers import echeance_calc
 import json
 import uuid
 import hashlib
@@ -83,19 +84,21 @@ def ipn(request):
         my_api_secret_sha256 = hashlib.sha256(
             API_SECRET.encode('utf-8')).hexdigest()
         my_api_key_sha256 = hashlib.sha256(API_KEY.encode('utf-8')).hexdigest()
-        if my_api_key_sha256 == api_key_sha256 and my_api_secret_sha256 == api_secret_sha256:
-            if request.POST["type_event"] and request.POST["type_event"] == "sale_complete":
-                investissement = Investissement.objects.filter(
-                    transaction_uid=request.POST["ref_command"]).first()
-                if investissement:
-                    investissement.status = "validate"
-                    investissement.save()
-            if request.POST["type_event"] and request.POST["type_event"] == "sale_canceled":
-                investissement = Investissement.objects.filter(
-                    transaction_uid=request.POST["ref_command"]).first()
-                if investissement:
-                    investissement.status = "cancelled"
-                    investissement.save()
+        # if my_api_key_sha256 == api_key_sha256 and my_api_secret_sha256 == api_secret_sha256:
+        if request.POST["type_event"] and request.POST["type_event"] == "sale_complete":
+            investissement = Investissement.objects.filter(
+                transaction_uid=request.POST["ref_command"]).first()
+            if investissement:
+                investissement.status = "validate"
+                investissement.save()
+                echeance_calc(investissement)
+            return HttpResponse(json.dumps({"message": "test", "status": 1}))
+        elif request.POST["type_event"] and request.POST["type_event"] == "sale_canceled":
+            investissement = Investissement.objects.filter(
+                transaction_uid=request.POST["ref_command"]).first()
+            if investissement:
+                investissement.status = "cancelled"
+                investissement.save()
             return HttpResponse(json.dumps({"message": "test", "status": 1}))
         else:
             return HttpResponse(json.dumps({"message": "test", "status": 0}))

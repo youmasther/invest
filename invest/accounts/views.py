@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import CustomUser as User
 from django.http.response import HttpResponse
 from .forms import *
-from core.models import Investissement
+from core.models import Investissement, Echeance
 import json
 import os
 
@@ -108,7 +108,7 @@ def profile(request):
     investissements = Investissement.objects.filter(
         investisseur=request.user.investisseur)
 
-    return render(request, "profile.html", {"investisseur": investisseur, "investissements": investissements})
+    return render(request, "profile.html", {"investisseur": investisseur, "investissements": list(reversed(investissements))})
 
 
 def hx_update_user_profile_img(request):
