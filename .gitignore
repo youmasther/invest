@@ -1,5 +1,5 @@
 env
 invest/db.sqlite3
-invest/env.py
+/invest/invest/env.py
 .vscode
 invest.zip
