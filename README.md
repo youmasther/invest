@@ -55,7 +55,18 @@ pip install -r requirements.txt
 ### Appliquer les migrations
 
 ```bash
-python manage.py migrate
+python invest/manage.py migrate
+```
+### Créé un super utilisateur
+
+```bash
+python invest/manage.py createsuperuser
+```
+
+### Démarer le serveur
+
+```bash
+python invest/manage.py runserver
 ```
 
 Vous pouvez maintenant accéder à l'application à l'adresse http://127.0.0.1:8000/.
