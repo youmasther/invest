@@ -24,107 +24,94 @@ def home(request):
 
 
 @csrf_exempt
-# @api_view(['POST'])
 def send_investissement(request):
-
-    print(request.POST)
-    url = "https://paytech.sn/api/payment/request-payment"
-    ref_command = str(uuid.uuid4())
-    payload = json.dumps({
+    payload = {
         "item_name": f"invest/{request.user.investisseur.prenom} {request.user.investisseur.nom}",
-        "item_price": int(request.POST.get("amount", None)),
+        "item_price": int(request.POST.get("amount")),
         "currency": "XOF",
         "command_name": "Crowdlending Décembre 2022",
-        "ref_command": ref_command,
+        "ref_command": str(uuid.uuid4()),
         "env": "test",
-    })
-    headers = {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        'API_KEY': API_KEY,
-        'API_SECRET': API_SECRET
     }
-    campagne = Campagne.objects.filter(
-        libelle__iexact="Crowdlending Décembre 2022").first()
-    response = requests.request("POST", url, headers=headers, data=payload)
-    if campagne is not None:
+    response = requests.post(
+        "https://paytech.sn/api/payment/request-payment",
+        json=payload,
+        headers={
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+            "API_KEY": API_KEY,
+            "API_SECRET": API_SECRET,
+        },
+    )
 
-        print(type(response))
-        data = {
-            "transaction_uid": ref_command,
-            "investisseur": request.user.investisseur,
-            "telephone": request.user.investisseur.telephone,
-            "amount": request.POST.get("amount", None),
-            "campagne": campagne,
-            "type": request.POST.get("type_invest", None),
-            "remboursement": request.POST.get("remboursement", None),
-            "is_send": True,
-            "status": "in_process"
-        }
-        investissement_form = InvestissementCreationForm(data)
-        if investissement_form.is_valid:
-            investissement_form.save()
-    # print(response.json())
+    if response.status_code == 200:
+        campagne = Campagne.objects.filter(
+            libelle__iexact="Crowdlending Décembre 2022"
+        ).first()
+        if campagne:
+            Investissement.objects.create(
+                transaction_uid=payload["ref_command"],
+                investisseur=request.user.investisseur,
+                telephone=request.user.investisseur.telephone,
+                amount=request.POST.get("amount"),
+                campagne=campagne,
+                type=request.POST.get("type_invest"),
+                remboursement=request.POST.get("remboursement"),
+                is_send=True,
+                status="in_process",
+            )
 
-    return HttpResponse(json.dumps(response.json()))
+    return HttpResponse(response.content, content_type="application/json")
 
 
 @csrf_exempt
-# @api_view(['POST'])
 def ipn(request):
-    if request.method == "POST":
-        # # file_object = open(, 'a')
-        # with open(BASE_DIR / 'test_log.txt', "a") as file_object:
-        #     file_object.write(request.body)
-        print(request.POST)
+    if request.method != "POST":
+        return HttpResponse(status=405)
 
-        # inputtxt = request.POST['getrow']
-        api_key_sha256 = request.POST['api_key_sha256']
-        api_secret_sha256 = request.POST['api_secret_sha256']
-        my_api_secret_sha256 = hashlib.sha256(
-            API_SECRET.encode('utf-8')).hexdigest()
-        my_api_key_sha256 = hashlib.sha256(API_KEY.encode('utf-8')).hexdigest()
-        # if my_api_key_sha256 == api_key_sha256 and my_api_secret_sha256 == api_secret_sha256:
-        if request.POST["type_event"] and request.POST["type_event"] == "sale_complete":
-            investissement = Investissement.objects.filter(
-                transaction_uid=request.POST["ref_command"]).first()
-            if investissement:
-                investissement.status = "validate"
-                investissement.save()
-                echeance_calc(investissement)
+    api_key_sha256 = request.POST.get("api_key_sha256")
+    api_secret_sha256 = request.POST.get("api_secret_sha256")
+    if not (api_key_sha256 and api_secret_sha256):
+        return HttpResponse(status=400)
+
+    my_api_secret_sha256 = hashlib.sha256(
+        API_SECRET.encode('utf-8')).hexdigest()
+    my_api_key_sha256 = hashlib.sha256(API_KEY.encode('utf-8')).hexdigest()
+    if api_key_sha256 != my_api_key_sha256 or api_secret_sha256 != my_api_secret_sha256:
+        return HttpResponse(status=403)
+
+    type_event = request.POST.get("type_event")
+    if type_event == "sale_complete":
+        investissement = Investissement.objects.filter(
+            transaction_uid=request.POST.get("ref_command")).first()
+        if investissement:
+            investissement.status = "validate"
+            investissement.save()
+            echeance_calc(investissement)
             return HttpResponse(json.dumps({"message": "test", "status": 1}))
-        elif request.POST["type_event"] and request.POST["type_event"] == "sale_canceled":
-            investissement = Investissement.objects.filter(
-                transaction_uid=request.POST["ref_command"]).first()
-            if investissement:
-                investissement.status = "cancelled"
-                investissement.save()
+    elif type_event == "sale_canceled":
+        investissement = Investissement.objects.filter(
+            transaction_uid=request.POST.get("ref_command")).first()
+        if investissement:
+            investissement.status = "cancelled"
+            investissement.save()
             return HttpResponse(json.dumps({"message": "test", "status": 1}))
-        else:
-            return HttpResponse(json.dumps({"message": "test", "status": 0}))
+
+    return HttpResponse(json.dumps({"message": "test", "status": 0}))
 
 
 @csrf_exempt
-# @api_view(['POST'])
 def success(request):
-    # # response = json.loads(request.body)
-    # investissement = Investissement.objects.filter(
-    #     transaction_uid=request.POST.get("token", "")).first()
-    # if investissement:
-    #     investissement.status = "validate"
-    #     investissement.save()
-    # print(request.body)
-    return render(request, "success.html")
+    transaction_uid = request.POST.get("token", "")
+    investissement = Investissement.objects.filter(transaction_uid=transaction_uid).first()
+    if investissement:
+        investissement.status = "validate"
+        investissement.save(update_fields=['status'])
+    return render(request, "success.html", content_type="text/html")
 
 
 @csrf_exempt
-# @api_view(['POST'])
 def cancel(request):
-    # # response = json.loads(request.body)
-    # investissement = Investissement.objects.filter(
-    #     transaction_uid=request.POST.get("token", "")).first()
-    # if investissement:
-    #     investissement.status = "cancelled"
-    #     investissement.save()
-    # print(request.body)
+    transaction_uid = request.POST.get("token", "")
+    Investissement.objects.filter(transaction_uid=transaction_uid).update(status="cancelled")
     return render(request, "cancel.html")
