@@ -16,8 +16,8 @@
 
     #main #faq .card .card-header {
         border: 0;
-        -webkit-box-shadow: 0 0 20px 0 #f54b6d80;
-        box-shadow: 0 0 20px 0 rgba(246, 104, 132, 0.5);
+        -webkit-box-shadow: 0 0 20px 0 #a67c00;
+        box-shadow: 0 0 20px 0 rgba(166, 124, 0, 0.5);
         border-radius: 2px;
         padding: 0;
     }
@@ -77,11 +77,11 @@
 
     .pay-btn {
         background-color: white;
-        color: #F66884;
+        color: #bf9b30;
     }
 
     .pay-btn:hover {
-        background-color: #F66884;
+        background-color: #bf9b30;
         color: white;
     }
 </style>
@@ -105,7 +105,8 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="mb-2">Evolution de la levée</h5>
-                            <p>{{campagne.solde_obtenu}} sur <span class="text-primary">{{campagne.amount_needed}} </span>
+                            <p>{{campagne.solde_obtenu}} sur <span class="text-primary">{{campagne.amount_needed}}
+                                </span>
                                 Fcfa</p>
                             <div class="progress">
                                 <div class="progress-bar rounded" role="progressbar"
@@ -163,8 +164,12 @@
         </div>
         <div class="col-md-7 order-first order-md-last mb-3">
             <div class="embed-responsive embed-responsive-16by9" style="min-height: 430px;">
-                <iframe class="embed-responsive-item rounded" src="https://www.youtube.com/embed/qEx7XT5oNuI"
-                    allowfullscreen></iframe>
+                <!-- <iframe class="embed-responsive-item rounded" src="https://www.youtube.com/embed/qEx7XT5oNuI"
+                    allowfullscreen></iframe> -->
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/yKvD93eMmW8?si=vZnYUHA-tmALABgb"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
             <!-- old embed link: https://www.youtube.com/embed/PWjhOUZMhxY?autoplay=1 -->
         </div>
@@ -183,48 +188,45 @@
                                 <a href="#" class="btn btn-header-link" data-toggle="collapse" data-target="#faq1"
                                     aria-expanded="true" aria-controls="faq1">
                                     <b>
-                                        Une entreprise fondée et portée par un passionné expérimenté
+                                        Présentation de InnovaFlow
                                     </b>
                                 </a>
                             </div>
 
                             <div id="faq1" class="collapse show" aria-labelledby="faqhead1" data-parent="#faq">
                                 <div class="card-body">
-                                    Subito est un acteur majeur au Senegal pour les trajets aeroport qui affiche
-                                    une traction impressionnante. Cree en 2018 par Mor Lamotte diplomé en
-                                    management Logistique est portuaire à l’Université du Littoral Côte d’Opal
-                                    de Dunkerque. Il a eu à créer dans le passé des entreprises dans le domaine
-                                    de l’import/export mais également dans la distribution alimentaire. Etant
-                                    étudiant en 1ère année en transport et logistique à ITECOM, il a acquis son
-                                    premier taxi suite à sa participation à la tontine des femmes de sacre cœur
-                                    1. Les revenus du taxi lui permettaient de financer ses études avant de
-                                    trouver son premier emploi en 2009. Il a occupé le poste de coordonnateur
-                                    des opérations logistiques pour le Sénégal et la sous- région à SOLUTRAD.
+                                    InnovaFlow est une plateforme SaaS innovante conçue pour simplifier et optimiser la
+                                    gestion des flux de travail et des projets pour les entreprises de toutes tailles.
+                                    Notre objectif est de fournir une solution tout-en-un qui centralise la
+                                    planification, la collaboration et le suivi des performances, le tout dans une
+                                    interface intuitive et conviviale.
                                 </div>
                             </div>
                         </div>
                         <div class="card shadow">
                             <div class="card-header" id="faqhead2">
                                 <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse"
-                                    data-target="#faq2" aria-expanded="true" aria-controls="faq2"><b>SUBITO en
-                                        chiffre</b></a>
+                                    data-target="#faq2" aria-expanded="true" aria-controls="faq2"><b>Fonctionnalités
+                                        Clés :</b></a>
                             </div>
 
                             <div id="faq2" class="collapse" aria-labelledby="faqhead2" data-parent="#faq">
                                 <div class="card-body">
                                     <ul class="list-unstyled">
                                         <li>
-                                            Un succès commercial avec pres de 900M de CA cumulés
+                                            Gestion de Projet Intuitive : Créez, assignez et suivez les tâches avec des
+                                            tableaux de bord visuels et des timelines interactives.
                                         </li>
-                                        <li>Une flotte de 15 voitures</li>
-                                        <li>36 chauffeurs partenaires</li>
-                                        <li>Plus de 40 clients Enterprise</li>
-                                        <li>Plus de 3500 clients particuliers</li>
-                                        <li>Un taux de fidélité très élevé</li>
-                                        <li>170k abonnés sur Facebook</li>
-                                        <li>
-                                            D’excellents avis clients avec 214 avis positifs (4,5 / 5)
-                                        </li>
+                                        <li>Collaboration en Temps Réel : Travaillez en équipe, partagez des fichiers et
+                                            communiquez sans interruption grâce à des outils intégrés de chat et de
+                                            vidéo.</li>
+                                        <li>Automatisation des Processus : Automatisez les tâches répétitives et gagnez
+                                            du temps avec des workflows personnalisables.</li>
+                                        <li>Analyses et Reporting : Accédez à des rapports détaillés pour évaluer les
+                                            performances de vos projets et prendre des décisions éclairées.</li>
+                                        <li>Intégrations Fluides : Connectez vos outils préférés avec InnovaFlow grâce à
+                                            notre large gamme d'intégrations API.</li>
+
                                     </ul>
                                 </div>
                             </div>
@@ -233,23 +235,18 @@
                             <div class="card-header" id="faqhead3">
                                 <a href="#" class="btn btn-header-link collapsed" data-toggle="collapse"
                                     data-target="#faq3" aria-expanded="true" aria-controls="faq3">
-                                    <b>L’entreprise lève aujourd’hui des fonds pour</b></a>
+                                    <b>Pourquoi investir dans InnovaFlow ?</b></a>
                             </div>
 
                             <div id="faq3" class="collapse" aria-labelledby="faqhead3" data-parent="#faq">
                                 <div class="card-body">
-                                    <ul class="list-unstyled">
-                                        <li>
-                                            Passer de transporteur privé à OTA online tourism agency
-                                        </li>
-                                        <li>Avoir une couverture nationale et internationale</li>
-                                        <li>Acheter de nouveaux vehicules</li>
-                                        <li>
-                                            Mais surtout renforcer son équipe et ses investissements
-                                            en marketing
-                                        </li>
-                                        <li>Multiplier notre CA par 10</li>
-                                    </ul>
+                                    L'ère numérique exige des outils performants pour gérer des projets complexes.
+                                    InnovaFlow est à la pointe de cette évolution, offrant une solution qui allie
+                                    efficacité et simplicité. Avec un marché en pleine expansion et une équipe
+                                    passionnée derrière le projet, nous sommes convaincus que notre plateforme a le
+                                    potentiel de devenir un acteur majeur dans l'industrie des logiciels de gestion.
+                                    Nous recherchons des investisseurs visionnaires pour nous aider à accélérer notre
+                                    croissance et à réaliser notre vision.
                                 </div>
                             </div>
                         </div>
@@ -265,9 +262,12 @@
     <div class="row">
         <div class="col-md-6">
             <div class="embed-responsive embed-responsive-16by9" style="max-height: 430px;">
-                <iframe class="embed-responsive-item rounded" src="https://www.youtube.com/embed/PWjhOUZMhxY?autoplay=1"
-                    allowfullscreen></iframe>
-
+                <!-- <iframe class="embed-responsive-item rounded" src="https://www.youtube.com/embed/PWjhOUZMhxY?autoplay=1"
+                    allowfullscreen></iframe> -->
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/yKvD93eMmW8?si=vZnYUHA-tmALABgb"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             </div>
         </div>
         <div class="col-md-6 order-first order-md-last mb-3" id="invest_box">
@@ -320,7 +320,7 @@
                     </div>
                     <div class="modal-body">
                         <div class="form-title text-center">
-                            <h4>Investir dans <span class="text-primary">MySubito</span></h4>
+                            <h4>Investir dans <span class="text-primary">InnovaFlow</span></h4>
                         </div>
                         <div class="d-flex flex-column text-center">
                             <form>
@@ -422,10 +422,10 @@
 
             slider.noUiSlider.on('update', function (values, handle) {
                 value.innerHTML = values[handle];
-                let result = (values[handle] < campagne_val * (1 / 4)) ? color('c-50', 118, '#f77d72', values[handle]) :
-                    (values[handle] < campagne_val * (2 / 4)) ? color('c-150', 120, '#f36573', values[handle]) :
-                        (values[handle] < campagne_val * (3 / 4)) ? color('c-250', 122, '#f35574', values[handle]) :
-                            (values[handle] >= campagne_val - 100000) ? color('c-500', 125, '#f03d72', values[handle]) : ''
+                let result = (values[handle] < campagne_val * (1 / 4)) ? color('c-50', 118, '#9b4d0a', values[handle]) :
+                    (values[handle] < campagne_val * (2 / 4)) ? color('c-150', 120, '#808080', values[handle]) :
+                        (values[handle] < campagne_val * (3 / 4)) ? color('c-250', 122, '#bf9b30', values[handle]) :
+                            (values[handle] >= campagne_val - 100000) ? color('c-500', 125, '#9ac5db', values[handle]) : ''
             });
 
             inputs.forEach(function (input, handle) {

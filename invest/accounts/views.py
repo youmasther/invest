@@ -34,6 +34,7 @@ def login(request):
 
 def logout(request):
     if request.method == "GET":
+        print("logout")
         auth.logout(request)
         return redirect('home')
 
