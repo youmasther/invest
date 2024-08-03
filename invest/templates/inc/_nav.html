@@ -2,9 +2,8 @@
 <div class="container-fluid">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'home' %}">
-      Kay
       <span class="text-primary" style="font-size: 25px; font-weight: bold">
-        Investir
+        Kay
       </span>
     </a>
     <button
@@ -21,33 +20,78 @@
 
     <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#invest_box"
-            ><small>Investir</small> <span class="sr-only">(current)</span></a
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'home' %}">
+            <i class="fas fa-home"></i> <small>Accueil</small>
+          </a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="transactionsDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
           >
+            <i class="fas fa-exchange-alt"></i> <small>Transactions</small>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="transactionsDropdown">
+            <a class="dropdown-item" href="#make_payment"
+              ><i class="fas fa-credit-card"></i>
+              <small>Faire un paiement</small></a
+            >
+            {% if request.user.is_authenticated and request.user.investisseur %}
+            <a class="dropdown-item" href="{% url 'profile' %}"
+              ><i class="fas fa-list"></i>
+              <small>Liste des transactions</small></a
+            >
+            {% endif %}
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="supportDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            <i class="fas fa-headset"></i> <small>Support</small>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="supportDropdown">
+            <a class="dropdown-item" href="#faqs"
+              ><i class="fas fa-question-circle"></i> <small>FAQs</small></a
+            >
+            <a class="dropdown-item" href="#contact"
+              ><i class="fas fa-envelope"></i> <small>Contact</small></a
+            >
+          </div>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0 mr-5">
-        {% if request.user.is_authenticated %}
-        <label class="label mr-2">Hi, {{request.user.investisseur}}!</label>
-        <a
-          class="btn btn-outline-primary btn-round my-2 my-sm-0 mr-2"
-          href="{% url 'profile' %}"
-          title="Mon compte"
-          ><i class="fas fa-user"></i
-        ></a>
-        <a
-          class="btn btn-outline-primary btn-round my-2 my-sm-0 mr-2"
-          href="{% url 'change_password' %}"
-          title="changer de mot passe"
-          ><i class="fas fa-lock"></i
-        ></a>
+        {% if request.user.is_authenticated and request.user.investisseur %}
+        <label class="label mr-2"
+          >Bienvenu(e), {{request.user.investisseur}}!</label
+        >
+
+        <a class="nav-link" href="{% url 'profile' %}">
+          <i class="fas fa-user text-primary"></i> <small>Profil</small>
+        </a>
+
+        <a class="nav-link" href="{% url 'change_password' %}">
+          <i class="fas fa-cogs text-primary"></i> <small>Paramètres</small>
+        </a>
         <a
           class="btn btn-outline-primary btn-round my-2 my-sm-0"
           href="{% url 'logout' %}"
           title="Déconnexion"
-          ><i class="fas fa-sign-out-alt"></i
-        ></a>
+        >
+          <i class="fas fa-sign-out-alt"></i>
+        </a>
         {% else %}
         <button
           class="btn btn-outline-primary btn-round my-2 my-sm-0"
@@ -62,4 +106,11 @@
       </form>
     </div>
   </nav>
+
+  <!-- Titre placé après la barre de navigation et centré -->
+  <div class="container mt-4 text-center">
+    <h1 class="text-primary" style="font-size: 30px; font-weight: bold">
+      Module de Paiement Électronique
+    </h1>
+  </div>
 </div>
